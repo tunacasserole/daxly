@@ -14,7 +14,7 @@ gem 'rails'
 gem 'puma'
 gem 'turbolinks'
 gem 'font-awesome-rails'
-
+gem 'uglifier'
 
 
 group :development, :test do
