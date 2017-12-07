@@ -1,0 +1,40 @@
+<button class="btn btn-outline-<%= resource.new_record? ? 'primary' : 'primary' %> btn--icon-text waves-effect" data-toggle="modal" data-target="#vendor-modal" data-id="new">
+  <span>
+    <i class="zmdi <%= resource.new_record? ? 'zmdi-plus' : 'zmdi-menu' %>"></i>
+    &nbsp
+    <%= resource.new_record? ? 'Add' : 'Edit' %> Vendor
+  </span>
+</button>
+
+<div class="modal fade" id="vendor-modal" tabindex="-1" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="text-right">
+      <% unless resource.new_record? %>
+      <%= link_to "<i class='actions__item zmdi zmdi-favorite-outline' style='color: grey'></i>".html_safe, "", data: {confirm: "Follow the #{@vendor.name} Vendor?"},  method: :put %>
+      <%= link_to "<i class='actions__item zmdi zmdi-delete' style='color: grey'></i>".html_safe, "/vendors/#{@vendor.id}", data: {confirm: 'Destroy this vendor?'},  method: :delete %>
+      <% end %>
+    </div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= resource.new_record? ? 'Add' : 'Edit' %> an Vendor</h5>
+      </div>
+      <div class="modal-body">
+        <%= render partial: 'vendors/form', locals: { resource: resource } %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CANCEL</button>
+        <%= link_to (resource.new_record? ? 'CREATE' : 'UPDATE'), "#", class: "btn btn-primary waves-effect", onclick: "$('#vendor-form').submit()" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  $( document ).on('turbolinks:load', function() {
+    var height = $(window).height() - 200;
+
+    $('#vendorModal .modal-body').height(200);
+
+  });
+</script>

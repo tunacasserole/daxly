@@ -1,0 +1,4 @@
+module Studio::Globals
+
+
+end

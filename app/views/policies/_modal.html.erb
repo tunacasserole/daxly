@@ -1,0 +1,40 @@
+<button class="btn btn-outline-<%= resource.new_record? ? 'primary' : 'primary' %> btn--icon-text waves-effect" data-toggle="modal" data-target="#policy-modal" data-id="new">
+  <span>
+    <i class="zmdi <%= resource.new_record? ? 'zmdi-plus' : 'zmdi-menu' %>"></i>
+    &nbsp
+    <%= resource.new_record? ? 'Add' : 'Edit' %> Policy
+  </span>
+</button>
+
+<div class="modal fade" id="policy-modal" tabindex="-1" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="text-right">
+      <% unless resource.new_record? %>
+      <%= link_to "<i class='actions__item zmdi zmdi-favorite-outline' style='color: grey'></i>".html_safe, "", data: {confirm: "Follow the #{@policy.name} Policy?"},  method: :put %>
+      <%= link_to "<i class='actions__item zmdi zmdi-delete' style='color: grey'></i>".html_safe, "/policies/#{@policy.id}", data: {confirm: 'Destroy this policy?'},  method: :delete %>
+      <% end %>
+    </div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= resource.new_record? ? 'Add' : 'Edit' %> an Policy</h5>
+      </div>
+      <div class="modal-body">
+        <%= render partial: 'policies/form', locals: { resource: resource } %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CANCEL</button>
+        <%= link_to (resource.new_record? ? 'CREATE' : 'UPDATE'), "#", class: "btn btn-primary waves-effect", onclick: "$('#policy-form').submit()" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  $( document ).on('turbolinks:load', function() {
+    var height = $(window).height() - 200;
+
+    $('#policyModal .modal-body').height(200);
+
+  });
+</script>
