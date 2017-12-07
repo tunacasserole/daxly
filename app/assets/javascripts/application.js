@@ -31,7 +31,6 @@
 //
 //= require dist/js/app
 //= require core
-//= require albums
 //= require vendors/jquery.bootgrid.min
 //
 //= require_tree .
